@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>北京桦水科技公司简介</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css">
+    <style>
+        /* 基础重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+
+        /* 主色调定义 */
+        :root {
+            --primary-blue: #1890ff;
+            --tech-gradient: linear-gradient(135deg, #1890ff 0%, #0052d9 100%);
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --border-color: rgba(0, 0, 0, 0.15);
+        }
+
+        body {
+            background: #ffffff; /* 背景改为白色 */
+            color: #333333;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* 专业导航栏 */
+        .nav {
+            position: fixed;
+            width: 100%;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav .logo img {
+            height: 60px; /* Logo放大 */
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav a {
+            color: rgba(0, 0, 0, 0.9);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-blue);
+            transition: width 0.3s ease;
+        }
+
+        .nav a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: var(--tech-gradient);
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            color: white !important;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(24, 144, 255, 0.3);
+        }
+
+        /* 现代化内容区块 */
+        section {
+            min-height: 100vh;
+            padding: 8rem 10% 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            background: var(--tech-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--primary-blue);
+        }
+
+       /* 卡片布局系统 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .title {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .description {
+            margin-bottom: 1.5rem;
+        }
+
+        .media-container {
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 1.5rem;
+            position: relative;
+            background: #000;
+        }
+
+        .media-container img,
+        .media-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* 核心业务滚动和交互效果 */
+        .portfolio-slider {
+            overflow: hidden;
+        }
+
+        .portfolio-slider .swiper-wrapper {
+            display: flex;
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-slider .swiper-slide {
+            flex-shrink: 0;
+            width: 100%;
+            max-width: 320px;
+            margin-right: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .portfolio-slider .swiper-slide:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 30px rgba(24, 144, 255, 0.3);
+        }
+
+        .portfolio-slider .swiper-slide:active {
+            transform: scale(1.2);
+        }
+
+        /* 客户案例轮播 */
+        .clients-slider {
+            width: 100%;
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+        .client-logo {
+            width: 180px;
+            padding: 1.5rem;
+            filter: grayscale(1);
+            opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+
+        .client-logo:hover {
+            filter: grayscale(0);
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 1024px) {
+            .business-item {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .title-column {
+                padding-right: 0;
+                padding-bottom: 2rem;
+            }
+            
+            .title-column::after {
+                right: auto;
+                left: 0;
+                bottom: 0;
+                top: auto;
+                width: 100%;
+                height: 2px;
+                background: linear-gradient(to right, 
+                    rgba(24, 144, 255, 0) 0%,
+                    var(--primary-blue) 50%,
+                    rgba(24, 144, 255, 0) 100%);
+            }
+        
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+            .quality-policy-container {
+        grid-template-columns: 1fr;
+    }
+    
+            .quality-text {
+                padding-right: 0;
+                margin-bottom: 2rem;
+            }
+        }
+
+        /* 粒子动画优化 */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(ellipse at bottom, #ffffff 0%, #f0f0f0 100%);
+        }
+
+        /* 公司简介背景图片 */
+        #intro {
+            background: url('img/bei3.png') no-repeat center center/cover; /* 添加地图背景图片 */
+            color: hsl(0, 3%, 8%);
+        }
+
+        /* 核心业务滚动和交互效果 */
+        .portfolio-slider {
+            overflow: hidden;
+        }
+
+        .portfolio-slider .swiper-wrapper {
+            display: flex;
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-slider .swiper-slide {
+            flex-shrink: 0;
+            width: 100%;
+            max-width: 320px;
+            margin-right: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .portfolio-slider .swiper-slide:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 30px rgba(24, 144, 255, 0.3);
+        }
+
+        .portfolio-slider .swiper-slide:active {
+            transform: scale(1.2);
+        }
+          /* 交互动画增强 */
+          .business-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(24, 144, 255, 0.1);
+        }
+         /* 新增核心业务左右布局样式 */
+         .core-business-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 业务项目容器 */
+        .business-item {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr; /* 左右列比例 */
+            gap: 3rem;
+            padding: 2.5rem;
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease;
+        }
+
+        /* 标题列样式 */
+        .title-column {
+            position: relative;
+            padding-right: 3rem;
+        }
+
+        .title-column::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 10%;
+            height: 80%;
+            width: 2px;
+            background: linear-gradient(to bottom, 
+                rgba(24, 144, 255, 0) 0%,
+                var(--primary-blue) 50%,
+                rgba(24, 144, 255, 0) 100%);
+        }
+
+        /* 内容列样式 */
+        .content-column {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* 标题样式优化 */
+        .business-title {
+            font-size: 1.8rem;
+            color: var(--primary-blue);
+            line-height: 1.3;
+            position: sticky;
+            top: 2rem;
+        }
+
+        /* 描述文字增强 */
+        .business-description {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* 媒体容器响应式处理 */
+        .business-media {
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            padding-top: 56.25%; /* 16:9 比例 */
+        }
+
+        .business-media img,
+        .business-media video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .quality-policy-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: var(--card-bg);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    }
+
+    .quality-text {
+        padding-right: 2rem;
+    }
+
+    .quality-text ul {
+        list-style-type: none;
+    }
+
+    .quality-text li {
+        margin-bottom: 1.5rem;
+        position: relative;
+        padding-left: 1.5rem;
+    }
+
+    .quality-text li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 5px;
+        width: 8px;
+        height: 8px;
+        background: var(--primary-blue);
+        border-radius: 50%;
+    }
+
+    .quality-image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .quality-image img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    </style>
+</head>
+<body>
+    <!-- 粒子背景 -->
+    <div id="particles-js"></div>
+
+    <!-- 专业导航 -->
+    <nav class="nav">
+        <div class="logo">
+            <img src="img/gongsi.png" alt="北京桦水科技" style="height: 60px;"> <!-- Logo放大 -->
+        </div>
+        <div class="nav-links">
+            <a href="#intro">公司简介</a>
+            <a href="#portfolio">核心业务</a>
+            <a href="#clients">合作客户</a>
+            <a href="#contact" class="cta-button">联系我们</a>
+        </div>
+    </nav>
+
+    <!-- 公司简介 -->
+    <section id="intro">
+        <h2 class="section-title animate__animated animate__fadeIn">科技创新 智领未来</h2>
+        <p class="animate__animated animate__fadeInUp animate__delay-1s" style="max-width: 800px; margin: 0 auto; opacity: 0.9;">
+            北京桦水科技有限公司成立于2020年12月，总部位于北京市海淀区中关村科技园。作为政府信息化解决方案的领先供应商，队一直专注于政府信息化业务的软件开发和产品维护工作，为用户提供软件定制开发维护服务。
+            <br><br>
+            我们拥有完善的研发管理流程和丰富的开发经验，可以为大型软件开发和系统集成项目，提供高质量、高效率的软件开发和测试服务，帮助客户提高产品质量和效率，降低成本和风险。
+            公司拥有多年应用系统和安全系统运维技术力量。可提供行业信息化系统运维、网络和安全系统驻场运维服务等。
+        </p>
+    </section>
+
+    <section id="portfolio">
+        <h2 class="section-title">核心业务领域</h2>
+        <div class="core-business-container">
+            <!-- 业务项1 -->
+            <article class="business-item animate-on-scroll">
+                <div class="title-column">
+                    <h2 class="business-title">气象后台业务监控系统</h2>
+                    <p>应水利部信息中心气象处要求，我公司自主研发后台业务监控系统，实现对气象处各业务的实时监控和告警及任务调度。</p>
+                </div>
+                <div class="content-column">
+                    <div class="business-description">
+                        <h3>基于实时气象数据和业务流程，实现：</h3>
+                        <p>集成多源数据采集、机器监控、产品加工、储存空间、接口监控等，提供分钟级气象预警服务。系统支持：
+                            <ul>
+                                <li>数据源到达情况监控</li>
+                                <li>产品加工情况监控</li>
+                                <li>气象处后台业务机器、接口、磁盘等监控</li>
+                            </ul>
+                        </p>
+                    </div>
+                    <div class="business-media">
+                        <video controls poster="img/qixiang1.png">
+                            <source src="img/qixiang.mp4" type="video/mp4">
+                            <source src="img/qixiang.webm" type="video/webm">
+                            您的浏览器不支持视频播放
+                        </video>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 业务项2 -->
+            <article class="business-item animate-on-scroll">
+                <div class="title-column">
+                    <h2 class="business-title">卫星云图AI推演系统</h2>
+                </div>
+                <div class="content-column">
+                    <div class="business-description">
+                        <h3>预测云图未来走向</h3>
+                        <p>整合葵花九号、风云四号等卫星数据源，实现：
+                            <ul>
+                                <li>云图数据分析</li>
+                                <li>云团路径概率预测</li>
+                                <li>发送告警短信</li>
+                            </ul>
+                            通过AI技术，预测云图未来走向，提前发现风险，提高安全性。
+                        </p>
+                    </div>
+                    <div class="business-media">
+                        <img src="img/1yuan.png" alt="卫星云图推演界面">
+                    </div>
+                </div>
+            </article>
+
+            <!-- 业务项3 -->
+            <article class="business-item animate-on-scroll">
+                <div class="title-column">
+                    <h2 class="business-title">气象后台解码加工程序</h2>
+                    <p>作为政府信息化解决方案的领先供应商，北京桦水科技有限公司在软件开发和技术支持方面积累了丰富的经验。
+                        我们特别在数值预报数据处理领域取得了显著成果，
+                        为水利部等重要政府部门提供了高效、可靠的解决方案。</p>
+                </div>
+                <div class="content-column">
+                    <div class="business-description">
+                        <h3>原始数据处理服务</h3>
+                        <p>对数值预报、延伸期预报、季节预报等多种预报数据进行解码、加工，实现：</p>
+                        <p>
+                            <ul>
+                                <li>数据清洗</li>
+                                <li>数据转换</li>
+                                <li>数据融合</li>
+                                <li>数据储存</li>
+                                <li>数据可视化等</li>
+                            </ul>
+                            通过以上服务，北京桦水科技有限公司帮助水利部等政府部门实现了数据处理流程的自动化和智能化，
+                            显著提升了工作效率和数据质量，为水利信息化建设做出了重要贡献。
+                        </p>
+                    </div>
+                    <div class="business-media">
+                        <img src="img/jiema.png" alt="气象后台解码加工程序界面">
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- 合作客户 -->
+    <section id="clients">
+        <h2 class="section-title">质量方针</h2>
+        <div class="quality-policy-container">
+            <div class="quality-text">
+                <ul>
+                    <li>时刻铭记质量和服务是桦水生存的基石，是客户选择桦水的理由。</li>
+                    <li>我们把客户要求与期望准确传递到桦水整个价值链，共同构建质量；</li>
+                    <li>我们尊重规则流程，一次把事情做对；我们发挥全球员工潜能，持续改进；</li>
+                    <li>我们与客户一起平衡机会与风险，快速响应客户需求，实现可持续发展。</li>
+                    <li>桦水承诺向客户提供高质量的产品、服务和解决方案，持续不断让客户体验到我们致力于为每个客户创造价值。</li>
+                </ul>
+            </div>
+            <div class="quality-image">
+                <img src="img/shuilibu.png" alt="质量方针">
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    
+    <script>
+        
+        // 增强型粒子配置
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 120 },
+                color: { value: '#1890ff' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5 },
+                size: { value: 2.5 },
+                move: {
+                    enable: true,
+                    speed: 1.5,
+                    direction: 'none',
+                    random: true,
+                    straight: false,
+                    out_mode: 'out',
+                }
+            },
+            interactivity: {
+                events: {
+                    onhover: { enable: true, mode: 'repulse' },
+                    resize: true
+                }
+            }
+        });
+
+        // 现代化滚动动画
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // 交互动画增强
+        gsap.utils.toArray('.quality-policy-container').forEach(container => {
+            gsap.from(container, {
+                scrollTrigger: {
+                    trigger: container,
+                    start: "top 80%",
+                    toggleActions: "play none none reset"
+                },
+                opacity: 0,
+                y: 50,
+                duration: 1,
+                ease: "power4.out"
+            });
+        });
+        // 导航栏动态效果
+        let lastScroll = 0;
+        const nav = document.querySelector('.nav');
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                nav.style.transform = 'translateY(-100%)';
+            } else {
+                nav.style.transform = 'translateY(0)';
+            }
+            lastScroll = currentScroll;
+        });
+
+        // 核心业务滚动和交互效果
+        const portfolioSlider = new Swiper('.portfolio-slider', {
+            slidesPerView: 'auto',
+            spaceBetween: 30,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    </script>
+</body>
+</html>
